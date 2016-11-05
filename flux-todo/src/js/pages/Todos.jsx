@@ -1,5 +1,6 @@
 import React from "react";
 import TodoStore from "../stores/TodoStore";
+import * as TodoActions from "../actions/TodoActions";
 
 export default class Todos extends React.Component {
     constructor() {
@@ -39,15 +40,19 @@ export class TodoItem extends React.Component {
         super();
     }
 
-    render() {
+    _deleteTodo(id){
+        TodoActions.deleteTodo(id)
+    }
 
-        const { complete, edit, text } = this.props;
+    render() {
+        const { id, complete, edit, text } = this.props;
         const icon = complete ? "\u2714" : "\u2716"
 
         return (
             <li>
                 <span style={{ marginRight: "10px" }}>{text}</span>
-                <span>{icon}</span>
+                <span style={{ marginRight: "10px" }}>{icon}</span>
+                <span class="glyphicon glyphicon-remove-sign" onClick={this._deleteTodo.bind(this, id)}></span>
             </li>
         )
     }
