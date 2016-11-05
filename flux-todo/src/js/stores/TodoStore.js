@@ -2,6 +2,7 @@ import {
     EventEmitter
 }
 from "events";
+import dispatcher from "../dispatcher";
 
 class TodoStore extends EventEmitter {
     constructor() {
@@ -32,9 +33,21 @@ class TodoStore extends EventEmitter {
     getAll() {
         return this.todos;
     }
+
+    handlerActions(action) {
+        switch (action.type) {
+            case "CREATE_TODO":
+                {
+                    this._createTodo(action.text);
+                }
+        }
+    }
 }
 
 // singleton
 const todoStore = new TodoStore;
+dispatcher.register(todoStore.handlerActions.bind(todoStore))
+
 export default todoStore;
+window.dispatcher = dispatcher;
 window.todoStore = todoStore;
