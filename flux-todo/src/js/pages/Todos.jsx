@@ -6,6 +6,7 @@ export default class Todos extends React.Component {
     constructor() {
         super();
         this.state = {
+            newTodoText: "",
             todos: TodoStore.getAll()
         }
     }
@@ -18,6 +19,17 @@ export default class Todos extends React.Component {
         })
     }
 
+    createTodo() {
+        dispatcher.dispatch({
+            type: "CREATE_TODO",
+            text: this.state.newTodoText
+        });
+    }
+
+    _setInputValue(e){
+        this.setState({newTodoText: e.target.value});
+    }
+
     render() {
         const { todos } = this.state;
         const TodoComponents = todos.map((todo) => {
@@ -27,6 +39,8 @@ export default class Todos extends React.Component {
         return (
             <div>
                 <h1>Todos</h1>
+                <input value={this.state.newTodoText} onChange={this._setInputValue.bind(this)}/>
+                <button onClick={this.createTodo.bind(this)} class="btn btn-info">Create</button>
                 <ul>
                     {TodoComponents}
                 </ul>
@@ -40,7 +54,7 @@ export class TodoItem extends React.Component {
         super();
     }
 
-    _deleteTodo(id){
+    _deleteTodo(id) {
         TodoActions.deleteTodo(id)
     }
 
