@@ -25,15 +25,19 @@ export default class Layout extends React.Component {
         // }, 1000);
 
         return (
-            <div>
-                <ul>
+            <div class="container">
+                <ul class="row">
                     <li><Link to="/">Features</Link></li>
                     <li><Link to="settings">Settings</Link></li>
                     <li><Link to="articles">Articles</Link></li>
                 </ul>
-                <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
+                <div class="row">
+                    <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
+                </div>
                 <input onChange={this.changeTitle.bind(this)} />
-                {this.props.children}
+                <div class="row">
+                    {this.props.children}
+                </div>
                 <Footer />
             </div>
         );

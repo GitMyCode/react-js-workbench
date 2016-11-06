@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 export default class Footer extends React.Component {
     render() {
         return (
-           <footer>{name}</footer>
+           <footer>footer</footer>
         );
     }
 }

@@ -14,6 +14,6 @@ ReactDOM.render(
         <Route path="/" component={Layout}>
             <IndexRoute component={Featured}></IndexRoute>
             <Route path="settings" component={Settings}></Route>
-            <Route path="articles/:article" component={Archives}></Route>
+            <Route path="articles(/:article)" component={Archives}></Route>
         </Route>
     </Router>, app);
