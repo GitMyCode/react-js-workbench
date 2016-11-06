@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDom from "react-dom";
+import logger from "redux-logger";
 
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 
 const userReducer = (state = {}, action) => {
     switch (action.type) {
@@ -21,18 +22,12 @@ const userReducer = (state = {}, action) => {
 const tweetsReducer = (state = [], action) => {
     return state;
 }
-
 const reducers = combineReducers({
     user: userReducer,
     tweets: tweetsReducer
 });
+const store = createStore(reducers, applyMiddleware(logger()));
 
-const store = createStore(reducers);
-
-
-store.subscribe(() => {
-    console.log("Store change", store.getState());
-})
 
 store.dispatch({ type: "CHANGE_NAME", payload: "Capitaine" });
 store.dispatch({ type: "CHANGE_AGE", payload: "29" });
