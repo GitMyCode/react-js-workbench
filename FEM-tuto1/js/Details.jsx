@@ -1,10 +1,11 @@
 const React = require('react')
 const Header = require('./Header')
+const { connector } = require("./Store")
+
 
 class Details extends React.Component {
   render () {
-    const params = this.props.params || {}
-    const {title, description, year, poster, trailer} = params
+    const {title, description, year, poster, trailer} = this.props.shows[this.props.params.id]
 
     return (
         <div className="container">
@@ -23,10 +24,11 @@ class Details extends React.Component {
   }
 }
 
-const { object } = React.PropTypes
+const { object, arrayOf } = React.PropTypes
 
 Details.propTypes = {
-  params: object.isRequired
+  params: object.isRequired,
+  shows: arrayOf(object).isRequired
 }
 
-module.exports = Details
+module.exports = connector(Details)

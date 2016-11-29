@@ -1,12 +1,12 @@
 const React = require('react')
 const ShowCard = require('./ShowCard')
 const Header = require("./Header")
-const { object, string } = React.PropTypes
+const { object, string, arrayOf } = React.PropTypes
 const { connector } = require('./Store')
 
 const Search = React.createClass({
   propTypes: {
-    route: object,
+    shows: arrayOf(object),
     searchTerm: string
   },
   render () {
@@ -15,7 +15,7 @@ const Search = React.createClass({
        <Header showSearch />
         <div className="show">
           {
-            this.props.route.shows
+            this.props.shows
               .filter((show) => `${show.title} ${show.description}`
                 .toUpperCase()
                 .indexOf(this.props.searchTerm.toUpperCase()) >= 0)
